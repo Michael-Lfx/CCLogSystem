@@ -52,6 +52,7 @@
 + (void)setupDefaultLogConfigure
 {
     [self setupLogConfigureWithExceedingTotalLogSize:DEFAULT_EXCEEDING_TOTAL_LOG_SIZE logType:CCLogTypeCCLOG];
+    setenv("XcodeColors", "YES", 0);
 }
 
 + (void)setupLogConfigureWithExceedingTotalLogSize:(unsigned long long)toalLogSize logType:(CCLogType)logType

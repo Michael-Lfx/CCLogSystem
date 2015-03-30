@@ -20,6 +20,23 @@ typedef NS_ENUM(NSInteger, CCLogType) {
     CCLogTypeNSLOG,
 };
 
+#define XCODE_COLORS_ESCAPE @"\033["
+#define XCODE_COLORS_RESET_FG  XCODE_COLORS_ESCAPE @"fg;" // Clear any foreground color
+#define XCODE_COLORS_RESET_BG  XCODE_COLORS_ESCAPE @"bg;" // Clear any background color
+#define XCODE_COLORS_RESET     XCODE_COLORS_ESCAPE @";"   // Clear any foreground or background color
+
+// Normal with theme default color
+#define CCLogInfo(...) \
+CCLog (CC_LOCATION(), __VA_ARGS__)
+
+// Warnning with yellow color
+#define CCLogWarm(frmt, ...) \
+CC_LOG((XCODE_COLORS_ESCAPE @"fg255,255,0;" frmt XCODE_COLORS_RESET), ##__VA_ARGS__)
+
+// Error with red color
+#define CCLogError(frmt, ...) \
+CC_LOG((XCODE_COLORS_ESCAPE @"fg255,0,0;" frmt XCODE_COLORS_RESET), ##__VA_ARGS__)
+
 // Use this Macro to log
 // Like: CC_LOG(@"This is a Log.");
 // The default output is "Timestamp + Thread Info + FILE + LINE + FUNCTION + Log content", like: "2014-10-31 10:09:05.361 . <NSThread: 0x7ff6d3c24ae0>{number = 1, name = main} AppDelegate.m at 24 (-[AppDelegate log]): @"Thi is a Log"
